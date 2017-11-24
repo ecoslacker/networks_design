@@ -41,7 +41,7 @@ or
 
 You need to install the requirements independently or you can install complete Python distribution such as **Anaconda** (<https://www.anaconda.com/download/>). Be sure to insall the Python 2.7 version.
 
-On Windows you can also try with another distribution such as **Python(x,y)**. However compatibility is not  
+On Windows you can also try with another distribution such as **Python(x,y)**. However you should consider that this framework is only tested under **Anaconda** and you may need some extra work.  
 
 ### Install requirements
 
@@ -90,7 +90,9 @@ If you want to use the GA metaheuristic you need to open the *optimizer_ga.py* s
 ## License
 
 Master Networks
+
 Optimal Design of Water Distribution Networks
+
 Copyright (C) 2017 Eduardo Jimenez
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
