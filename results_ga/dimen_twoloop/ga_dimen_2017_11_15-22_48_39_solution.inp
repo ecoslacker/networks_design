@@ -1,0 +1,144 @@
+[TITLE]
+
+[JUNCTIONS]
+ 2                                   150.0000
+ 3                                   160.0000
+ 4                                   155.0000
+ 5                                   150.0000
+ 6                                   165.0000
+ 7                                   160.0000
+
+[RESERVOIRS]
+ 1                                   210.0000 
+
+[TANKS]
+
+[PIPES]
+ 1                               1                               2                                  1000.0000     457.0000     130.0000       0.0000 
+ 2                               2                               3                                  1000.0000     356.0000     130.0000       0.0000 
+ 3                               2                               4                                  1000.0000     356.0000     130.0000       0.0000 
+ 4                               4                               5                                  1000.0000     152.0000     130.0000       0.0000 
+ 5                               4                               6                                  1000.0000     356.0000     130.0000       0.0000 
+ 6                               6                               7                                  1000.0000     102.0000     130.0000       0.0000 
+ 7                               3                               5                                  1000.0000     356.0000     130.0000       0.0000 
+ 8                               5                               7                                  1000.0000     254.0000     130.0000       0.0000 
+
+[PUMPS]
+
+[VALVES]
+
+[DEMANDS]
+ 2                                   100.000000 
+ 3                                   100.000000 
+ 4                                   120.000000 
+ 5                                   270.000000 
+ 6                                   330.000000 
+ 7                                   200.000000 
+
+[EMITTERS]
+
+[STATUS]
+
+[PATTERNS]
+
+[CURVES]
+
+[CONTROLS]
+
+[QUALITY]
+
+[SOURCES]
+
+[MIXING]
+
+[REACTIONS]
+ ORDER  BULK            1.00
+ ORDER  WALL            1
+ ORDER  TANK            1.00
+ GLOBAL BULK            0.000000
+ GLOBAL WALL            0.000000
+
+[ENERGY]
+ GLOBAL EFFIC        75.0000
+ DEMAND CHARGE       0.0000
+
+[TIMES]
+ DURATION            0:00:00
+ HYDRAULIC TIMESTEP  1:00:00
+ QUALITY TIMESTEP    0:05:00
+ REPORT TIMESTEP     1:00:00
+ REPORT START        0:00:00
+ PATTERN TIMESTEP    1:00:00
+ PATTERN START       0:00:00
+ RULE TIMESTEP       0:06:00
+ START CLOCKTIME     0:00:00
+ STATISTIC           NONE
+
+[OPTIONS]
+ UNITS               CMH
+ PRESSURE            METERS
+ HEADLOSS            H-W
+ UNBALANCED          CONTINUE 10
+ QUALITY             NONE
+ DEMAND MULTIPLIER   1.0000
+ EMITTER EXPONENT    0.5000
+ VISCOSITY           0.001400
+ DIFFUSIVITY         1.000000
+ SPECIFIC GRAVITY    1.000000
+ TRIALS              40
+ ACCURACY            0.00100000
+ TOLERANCE           0.01000000
+ CHECKFREQ           2
+ MAXCHECK            10
+ DAMPLIMIT           0.00000000
+
+[REPORT]
+ PAGESIZE            0
+ STATUS              NO
+ SUMMARY             YES
+ ENERGY              NO
+ NODES               ALL
+ LINKS               ALL
+ Elevation           NO
+ Demand              PRECISION 2
+ Head                PRECISION 2
+ Pressure            PRECISION 2
+ Quality             NO
+ Length              NO
+ Diameter            NO
+ Flow                PRECISION 2
+ Velocity            PRECISION 2
+ Headloss            PRECISION 2
+ Quality             NO
+ State               NO
+ Setting             NO
+ Reaction            NO
+[TAGS]
+
+[RULES]
+
+
+[COORDINATES]
+;Node            	X-Coord         	Y-Coord
+ 2               	3514.19         	7722.92         
+ 3               	1314.79         	7722.92         
+ 4               	3514.19         	5809.90         
+ 5               	1314.79         	5821.36         
+ 6               	3525.65         	3770.88         
+ 7               	1326.25         	3770.88         
+ 1               	5396.44         	7718.45         
+
+[VERTICES]
+;Link            	X-Coord         	Y-Coord
+
+[LABELS]
+;X-Coord           Y-Coord          Label & Anchor Node
+
+[BACKDROP]
+ DIMENSIONS     	0.00            	0.00            	10000.00        	10000.00        
+ UNITS          	Meters
+ FILE           	
+ OFFSET         	0.00            	0.00            
+
+
+[END]

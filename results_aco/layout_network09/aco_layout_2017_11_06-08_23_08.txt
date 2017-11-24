@@ -1,0 +1,62 @@
+Problem:   TREE_NET
+Dimension: 9
+Ants:      5
+alpha:     1.0
+beta:      2.0
+rho:       0.5
+max_iters: 10
+flag:      AS
+Cnn:       1000.0
+Tau max:   0.002
+Tau min:   0.000111111111111
+Tau 0:     0.005
+Colony:
+Ant:
+ UID:     1354
+ Type:    TREE_NET
+ Tour:    [4 2 5 0 1 8 3 7 6]
+ Visited: [1 1 1 1 1 1 1 1 1]
+ Arcs:    [16, 17, 3, 0, 29, 9, 31, 27] (tree-like network)
+ Tour length: 882.842712475
+
+Ant:
+ UID:     1355
+ Type:    TREE_NET
+ Tour:    [0 2 5 7 4 6 8 3 1]
+ Visited: [1 1 1 1 1 1 1 1 1]
+ Arcs:    [1, 17, 31, 16, 27, 35, 23, 10] (tree-like network)
+ Tour length: 800.0
+
+Ant:
+ UID:     1356
+ Type:    TREE_NET
+ Tour:    [0 2 1 3 4 6 5 7 8]
+ Visited: [1 1 1 1 1 1 1 1 1]
+ Arcs:    [1, 8, 9, 16, 23, 17, 31, 35] (tree-like network)
+ Tour length: 841.421356237
+
+Ant:
+ UID:     1357
+ Type:    TREE_NET
+ Tour:    [6 4 2 7 1 8 3 0 5]
+ Visited: [1 1 1 1 1 1 1 1 1]
+ Arcs:    [27, 16, 28, 10, 29, 23, 0, 17] (tree-like network)
+ Tour length: 841.421356237
+
+Ant:
+ UID:     1358
+ Type:    TREE_NET
+ Tour:    [6 3 4 2 0 5 8 1 7]
+ Visited: [1 1 1 1 1 1 1 1 1]
+ Arcs:    [23, 27, 16, 1, 17, 34, 0, 31] (tree-like network)
+ Tour length: 800.0
+
+--------------------------------------------------------------------------------
+Ant:
+ UID:     29
+ Type:    TREE_NET
+ Tour:    [8 7 4 6 3 5 2 0 1]
+ Visited: [1 1 1 1 1 1 1 1 1]
+ Arcs:    [35, 28, 34, 23, 31, 16, 1, 10] (tree-like network)
+ Tour length: 800.0
+Runtime: 0:00:00.131966

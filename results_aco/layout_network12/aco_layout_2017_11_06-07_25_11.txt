@@ -1,0 +1,62 @@
+Problem:    TREE_NET
+Dimension: 12
+Ants:      5
+alpha:     1.0
+beta:      2.0
+rho:       0.5
+max_iters: 10
+flag:      AS
+Cnn:       2603.03027593
+Tau max:   0.000768335281572
+Tau min:   3.20139700655e-05
+Tau 0:     0.00192083820393
+Colony:
+Ant:
+ UID:     1492
+ Type:    TREE_NET
+ Tour:    [ 2  4  7  8  9 11  5  6 10  3  1  0]
+ Visited: [1 1 1 1 1 1 1 1 1 1 1 1]
+ Arcs:    [22, 40, 56, 60, 64, 47, 39, 63, 31, 12, 0] (tree-like network)
+ Tour length: 1974.1076634
+
+Ant:
+ UID:     1493
+ Type:    TREE_NET
+ Tour:    [ 7  6  4  2  8  5  9  1  0  3 10 11]
+ Visited: [1 1 1 1 1 1 1 1 1 1 1 1]
+ Arcs:    [51, 39, 22, 56, 47, 60, 11, 0, 12, 63, 64] (tree-like network)
+ Tour length: 2071.04129185
+
+Ant:
+ UID:     1494
+ Type:    TREE_NET
+ Tour:    [10  9  8 11  5  7  3  6  4  1  0  2]
+ Visited: [1 1 1 1 1 1 1 1 1 1 1 1]
+ Arcs:    [63, 60, 64, 47, 56, 31, 51, 39, 12, 0, 22] (tree-like network)
+ Tour length: 1946.04233434
+
+Ant:
+ UID:     1495
+ Type:    TREE_NET
+ Tour:    [ 7  8  5 11  6  4  9 10  3  1  0  2]
+ Visited: [1 1 1 1 1 1 1 1 1 1 1 1]
+ Arcs:    [56, 47, 62, 51, 39, 60, 63, 31, 12, 0, 22] (tree-like network)
+ Tour length: 1989.41692554
+
+Ant:
+ UID:     1496
+ Type:    TREE_NET
+ Tour:    [10  9  8  7  6  5  3 11  1  0  4  2]
+ Visited: [1 1 1 1 1 1 1 1 1 1 1 1]
+ Arcs:    [63, 60, 56, 51, 47, 31, 64, 12, 0, 40, 22] (tree-like network)
+ Tour length: 1991.66079369
+
+--------------------------------------------------------------------------------
+Ant:
+ UID:     72
+ Type:    TREE_NET
+ Tour:    [ 4  2  6  7  8  9  5  3 11  1  0 10]
+ Visited: [1 1 1 1 1 1 1 1 1 1 1 1]
+ Arcs:    [22, 39, 51, 56, 60, 47, 31, 64, 12, 0, 63] (tree-like network)
+ Tour length: 1946.04233434
+Runtime: 0:00:00.284455

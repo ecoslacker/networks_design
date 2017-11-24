@@ -1,0 +1,30 @@
+- GenomeBase
+	Score:			 800.000000
+	Fitness:		 11461.903347
+
+	Params:		 {}
+
+	Slot [Evaluator] (Count: 1)
+		Name: <lambda> - Weight: 0.50
+	Slot [Initializator] (Count: 1)
+		Name: <lambda> - Weight: 0.50
+	Slot [Mutator] (Count: 1)
+		Name: G1DListMutatorSwap - Weight: 0.50
+		Doc:  The mutator of G1DList, Swap Mutator
+   
+   .. note:: this mutator is :term:`Data Type Independent`
+
+   
+	Slot [Crossover] (Count: 1)
+		Name: G1DListCrossoverTwoPoint - Weight: 0.50
+		Doc:  The G1DList crossover, Two Point
+
+   .. warning:: You can't use this crossover method for lists with just one element.
+
+   
+
+- G1DList
+	List size:	 8
+	List:		 [0, 4, 1, 1, 7, 3, 4, 6]
+
+Run time: 0:00:48.708823
