@@ -5,9 +5,20 @@ Created on Thu Feb 16 13:26:29 2017
 @author: ecoslacker
 """
 import os
+
 from datetime import datetime
-from pyevolve import G1DList, Consts, GSimpleGA, DBAdapters, Selectors, \
-     Mutators, Crossovers, Scaling
+
+# Install pyevolve if it isn't already installed in the system
+try:
+    from pyevolve import G1DList, Consts, GSimpleGA, DBAdapters, Selectors, \
+         Mutators, Crossovers, Scaling
+except:
+    # Install Pyevolve
+    import pip
+    pip.main(['install', 'pyserial'])
+    from pyevolve import G1DList, Consts, GSimpleGA, DBAdapters, Selectors, \
+         Mutators, Crossovers, Scaling
+
 from objectivefunctions import network_size, init_diameters, init_layout, \
      network_layout, network_size_cost
 from hydraulic import Network

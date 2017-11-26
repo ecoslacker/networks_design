@@ -45,13 +45,15 @@ On Windows you can also try with another distribution such as **Python(x,y)**. H
 
 ## Install requirements
 
-If you installed **Anaconda**, then the only requirement left is *Pyevolve*. This one you can install via *pip* with the following command. Also, you can install the *pyevolve* package from the **Anaconda Navigator**. 
+If you installed **Anaconda**, then the only requirement left is *Pyevolve*. If you want to install this package manually you can install it via *pip* with the following command. 
 
 ```bash
 pip install pyevolve
 ```
 
-On Unix-like systems (macOS, Linux) open a *Terminal* and type the command, note that you may need root permissions. On Windows open a *System prompt* and type the command. 
+On Unix-like systems (macOS, Linux) open a *Terminal* and type the command, note that you may need root permissions. On Windows open a *System prompt* and type the command, also you may need to have Administrator privileges.
+
+The program will try to install this requirement automagically if it isn't already installed in the system. This is done in runtime, but you need to be connected to internet for this to work.
 
 # Usage
 
