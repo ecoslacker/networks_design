@@ -5,7 +5,7 @@ A framework for optimal design of water distribution systems using Genetic Algor
 Ant Colony Optimization (ACO).
 Design includes both layout and pipe sizing of the entire network.
 
-## Requirements
+# Requirements
 
 This framework requires:
 
@@ -17,12 +17,12 @@ This framework requires:
 It is recommended to install **Anaconda** or **Python(x,y)** in order to get the requirements.
 *Pyevolve* can be installed via *pip* (see below).
 
-## Installation
+# Installation
 
 This framework does not require installation, just copy the directory and run the main script
 from a Python interpreter.
 
-### Download
+## Download
 
 To download this repository you have two options:
 
@@ -37,33 +37,33 @@ or
 2. Download directly by clicking on the button **Clone or download** above, then click on **Download ZIP**. Extract and run.
 
 
-### Install a Python environment
+## Install a Python environment
 
 You need to install the requirements independently or you can install complete Python distribution such as **Anaconda** (<https://www.anaconda.com/download/>). Be sure to insall the Python 2.7 version.
 
 On Windows you can also try with another distribution such as **Python(x,y)**. However you should consider that this framework is only tested under **Anaconda** and you may need some extra work.  
 
-### Install requirements
+## Install requirements
 
 If you installed **Anaconda**, then the only requirement left is *Pyevolve*. This one you can install via *pip* with the following command. Also, you can install the *pyevolve* package from the **Anaconda Navigator**. 
-
-On Unix-like systems (macOS, Linux) open a *Terminal* and type the command, note that you may need root permissions. On Windows open a *System prompt* and type the command. 
 
 ```bash
 pip install pyevolve
 ```
 
-## Usage
+On Unix-like systems (macOS, Linux) open a *Terminal* and type the command, note that you may need root permissions. On Windows open a *System prompt* and type the command. 
+
+# Usage
 
 Once that you have the program and the framework installed, you can open the main modules.
 
 Open the *optimizer_ga.py* script if you want to optimize the layout or pipe sizes using Genetic Algorithms, or if you want to use the ACO metaheuristic open the *optimizer_aco.py* script.
 
-### Data files
+## Data files
 
 The format of the data files is special.
 
-### Configure
+## Configure
 
 Uncomment the lines of the metaheuristic to use, this is done by removing the # symbols.
 
@@ -71,11 +71,11 @@ Provide the path of the data file for the desired problem instance.
 
 Configure the metaheuristic paramenters.
 
-### Run
+## Run
 
 Execute the script by pressing the *F5* key or by clicking the *Run* button. 
 
-## Examples
+# Examples
 
 In this sections a few examples of how to use the framework are presented.
 
@@ -87,7 +87,7 @@ If you want to use the ACO metaheuristic you need to open the *optimizer_aco.py*
 
 If you want to use the GA metaheuristic you need to open the *optimizer_ga.py* script. Then uncomment the lines for the dimensioing test code.
 
-## License
+# License
 
 Master Networks
 
