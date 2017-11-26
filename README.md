@@ -63,7 +63,32 @@ Open the *optimizer_ga.py* script if you want to optimize the layout or pipe siz
 
 ## Data files
 
-The format of the data files is special.
+Files required for, layout optimization:
+
+* CSV text file with cartesian coordinates of the problem instance (formatted as indicated by TSPLIB: <https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/>). Here is an example:
+
+'''
+NAME : network09
+COMMENT : Geem et al. (2000)
+TYPE : Network
+DIMENSION : 9
+EDGE_WEIGHT_TYPE : EUC_2D
+NODE_COORD_SECTION  
+1 0 0
+2 100 0
+3 0 100
+4 200 0
+5 100 100
+6 0 200
+7 200 100
+8 100 200
+9 200 200
+EOF  
+'''
+
+Pipe sizing:
+
+* EPANET's **inp** formatted text file with the network configuration and data. Be sure to provide the rigth units (SI or English Units) to the network. Please consult the EPANET 2 Manual (<https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf>) if necessary.
 
 ## Configure
 
@@ -91,7 +116,7 @@ If you want to use the GA metaheuristic you need to open the *optimizer_ga.py* s
 
 # License
 
-Master Networks
+Networks Design
 
 Optimal Design of Water Distribution Networks
 
