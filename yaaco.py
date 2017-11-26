@@ -394,10 +394,14 @@ class ACO(Problem):
             self.nn_ants = self.n
         self.Cnn = self.compute_tour_length(self.ant)
 
-        # Initial pheromone trail
+        # Initialize pheromone trail
         self.tau_0 = self.ants / self.Cnn
         if self.flag == 'MMAS':
             self.tau_0 = 1.0 / (self.rho * self.Cnn)
+
+            # Pheromone trails are initialized to upper pheromone trail limit
+            self.tau_max = 1.0 / (self.rho * self.Cnn)
+            self.tau_min = self.tau_max / (2.0 * self.n)
 
         self.create_colony(instance_type)
 
@@ -412,10 +416,6 @@ class ACO(Problem):
         self.choice_info = np.empty_like(self.pheromone)
         self.choice_info[:] = self.pheromone
         self.compute_choice_information()
-
-        # Pheromone trails are initialized to upper pheromone trail limit
-        self.tau_max = 1.0 / (self.rho * self.Cnn)
-        self.tau_min = self.tau_max / (2.0 * self.n)
 
         # Initialize the variables concerning statistics
         self.iteration = 0
@@ -1260,9 +1260,6 @@ class OptimizeDimensionsACO(ACO):
         if self.flag == 'MMAS':
             # Initialize with nearesth
             self.Cnn = 16000  # TwoLoop=16000
-            self.tau_max = None
-            self.tau_min = None
-            self.tau_0 = 1.0 / (self.rho * self.Cnn)
 
         # Read instance & create colony
         self.network = Network(self.data_dir, instance)
@@ -1417,11 +1414,11 @@ if __name__ == "__main__":
     instance = 'TwoLoop.inp'
     n_ants = 10
     aco = OptimizeDimensionsACO(n_ants, instance, path=directory, flag='MMAS',
-                                max_iters=1, rho=0.8, alpha=5, beta=3)
-#    best = aco.run()
-#    print("\n*** OVERALL BEST SOLUTION ***")
-#    print(best)
-#    aco.plot_best()
+                                max_iters=100, rho=0.8, alpha=5, beta=3)
+    best = aco.run()
+    print("\n*** OVERALL BEST SOLUTION ***")
+    print(best)
+    aco.plot_best()
 
     # **** TEST CODE FOR NETWORKS LAYOUT OPTIMIZATION ****
 

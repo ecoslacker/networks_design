@@ -1,0 +1,149 @@
+[TITLE]
+La Noria
+
+[JUNCTIONS]
+;ID	Elev	Demand	Pattern
+2	84.2	60	 	;
+3	83.9	60	 	;
+4	83.8	60	 	;
+5	83.9	60	 	;
+6	83.7	60	 	;
+7	82.6	60	 	;
+8	83.2	60	 	;
+9	83.5	60	 	;
+10	83.1	60	 	;
+11	82.9	60	 	;
+12	83.0	60	 	;
+13	83.5	60	 	;
+
+[RESERVOIRS]
+;ID	Head	Pattern
+1	210	 	;
+
+[TANKS]
+;ID	Elevation	InitLevel	MinLevel	MaxLevel	Diameter	MinVol	VolCurve
+
+[PIPES]
+;ID	Node1	Node2	Length	Diameter	Roughness	MinorLoss	Status
+1	1	2	40.0	254	130	0	Open	;
+2	2	3	325.0	254	130	0	Open	;
+3	2	4	190.012231712	254	130	0	Open	;
+4	3	5	218.000247018	254	130	0	Open	;
+5	4	6	200.001042497	254	130	0	Open	;
+6	13	7	117.848075928	254	130	0	Open	;
+7	13	8	104.270460822	254	130	0	Open	;
+8	6	9	184.00254183	254	130	0	Open	;
+9	9	10	150.839478254	254	130	0	Open	;
+10	8	11	305.995955039	254	130	0	Open	;
+11	9	12	214.995584373	254	130	0	Open	;
+12	5	13	159.751403124	254	130	0	Open	;
+
+[PUMPS]
+;ID	Node1	Node2	Parameters
+
+[VALVES]
+;ID	Node1	Node2	Diameter	Type	Setting	MinorLoss
+
+[TAGS]
+
+
+[DEMANDS]
+;Junction	Demand	Pattern	Category
+
+[STATUS]
+;ID	Status/Setting
+
+[PATTERNS]
+;ID	Multipliers
+
+[CURVES]
+;ID	X-Value	Y-Value
+
+[CONTROLS]
+
+
+[RULES]
+
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+;Junction	Coefficient
+
+[QUALITY]
+;Node	InitQual
+
+[SOURCES]
+;Node	Type	Quality	Pattern
+
+[REACTIONS]
+;Type	Pipe/Tank	Coefficient
+
+[MIXING]
+;Tank	Model
+
+[TIMES]
+ Duration           	0:00
+ Hydraulic Timestep 	1:00
+ Quality Timestep   	0:05
+ Pattern Timestep   	1:00
+ Pattern Start      	0:00
+ Report Timestep    	1:00
+ Report Start       	0:00
+ Start ClockTime    	12 am
+ Statistic          	NONE
+
+[REPORT]
+ Status             	No
+ Summary            	Yes
+ Page               	0
+ Nodes              	All
+ Links              	All
+
+[OPTIONS]
+ Units              	CMH
+ Headloss           	H-W
+ Specific Gravity   	1
+ Viscosity          	0.0014
+ Trials             	40
+ Accuracy           	0.001
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Continue 10
+ Pattern            	1
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5
+ Quality            	None mg/L
+ Diffusivity        	1
+ Tolerance          	0.01
+
+[COORDINATES]
+;Node	X-Coord	Y-Coord
+1	626.33	743.17	;
+2	586.33	743.17	;
+3	261.33	743.17	;
+4	514.74	567.16	;
+5	176.67	542.28	;
+6	419.91	391.07	;
+7	0.0	462.77	;
+8	141.18	305.57	;
+9	360.86	216.8	;
+10	274.27	93.29	;
+11	157.32	0.0	;
+12	425.24	11.67	;
+13	100.79	401.7	;
+
+[VERTICES]
+;Link	X-Coord	Y-Coord
+
+[LABELS]
+;X-Coord	Y-Coord	Label & Anchor Node
+
+[BACKDROP]
+
+
+[END]

@@ -1,0 +1,19 @@
+NAME : network12   
+COMMENT : Angeles-Montiel (2002) La Noria
+TYPE : Network   
+DIMENSION : 12   
+EDGE_WEIGHT_TYPE : EUC_2D   
+NODE_COORD_SECTION     
+1 626.33 743.17   
+2 586.33 743.17   
+3 261.33 743.17   
+4 514.74 567.16   
+5 176.67 542.28   
+6 419.91 391.07   
+7 0 462.77   
+8 141.18 305.57   
+9 360.86 216.8   
+10 274.27 93.29   
+11 157.32 0   
+12 425.24 11.67   
+EOF     

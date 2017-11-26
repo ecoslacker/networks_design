@@ -1,4 +1,4 @@
-# MASTER NETWORKS
+# NETWORKS DESIGN
 Optimal Design of Water Distribution Networks
 
 A framework for optimal design of water distribution systems using Genetic Algorithms (GA) and
