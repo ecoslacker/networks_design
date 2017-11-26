@@ -65,9 +65,9 @@ Open the *optimizer_ga.py* script if you want to optimize the layout or pipe siz
 
 Files required for, layout optimization:
 
-* CSV text file with cartesian coordinates of the problem instance (formatted as indicated by TSPLIB: <https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/>). Here is an example:
+* CSV text file with cartesian coordinates of the problem instance, formatted as indicated by [TSPLIB](<https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/>). Here is an example:
 
-'''
+```
 NAME : network09
 COMMENT : Geem et al. (2000)
 TYPE : Network
@@ -84,11 +84,11 @@ NODE_COORD_SECTION
 8 100 200
 9 200 200
 EOF  
-'''
+```
 
 Pipe sizing:
 
-* EPANET's **inp** formatted text file with the network configuration and data. Be sure to provide the rigth units (SI or English Units) to the network. Please consult the EPANET 2 Manual (<https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf>) if necessary.
+* EPANET's **inp** formatted text file with the network configuration and data. Be sure to provide the rigth units (SI or English Units) to the network. Please consult the [EPANET 2 User Manual](<https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf>) if necessary.
 
 ## Configure
 
