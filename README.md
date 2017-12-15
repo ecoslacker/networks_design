@@ -53,13 +53,40 @@ pip install pyevolve
 
 On Unix-like systems (macOS, Linux) open a *Terminal* and type the command, note that you may need root permissions. On Windows open a *System prompt* and type the command, also you may need to have Administrator privileges.
 
-The program will try to install this requirement automagically if it isn't already installed in the system. This is done in runtime, but you need to be connected to internet for this to work.
+NOTE: If your system does not have *Pyevolve*, the program will try to install this requirement automagically at the first execution. Your computer should be to be connected to the Internet.
 
 # Usage
 
 Once that you have the program and the framework installed, you can open the main modules.
 
 Open the *optimizer_ga.py* script if you want to optimize the layout or pipe sizes using Genetic Algorithms, or if you want to use the ACO metaheuristic open the *optimizer_aco.py* script.
+
+At the bottom of each file, there is a section starting with the line:
+
+```
+if __name__ == "__main__":
+```
+
+There is no need to edit the code above this line (unless you know exactly what are you doing). Below this line there are some examples you can try.
+
+The *optimizer_ga.py* has two function examples, those can be identified by:
+
+* *optim_dimensions_ga*: to optimze the dimensions of a network using Genetic Algorithms.
+* *optim_layout_ga*: to optimize the layout of a network using Genetic Algorithms.
+
+On the other hand the *optimizer_aco.py* has the function:
+
+* *optim_layout_aco*: to optimize the layout of a network using Ant Colony Optimization.
+
+Each function needs different arguments, you can explore each function's documentation to a more detailed description of their possible values.
+
+## Configure
+
+Uncomment the lines of the metaheuristic to use, this is done by removing the # symbols.
+
+Provide the path of the data file for the desired problem instance.
+
+Configure the metaheuristic paramenters.
 
 ## Data files
 
@@ -90,17 +117,9 @@ Pipe sizing:
 
 * EPANET's **inp** formatted text file with the network configuration and data. Be sure to provide the rigth units (SI or English Units) to the network. Please consult the [EPANET 2 User Manual](<https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf>) if necessary.
 
-## Configure
-
-Uncomment the lines of the metaheuristic to use, this is done by removing the # symbols.
-
-Provide the path of the data file for the desired problem instance.
-
-Configure the metaheuristic paramenters.
-
 ## Run
 
-Execute the script by pressing the *F5* key or by clicking the *Run* button. 
+Using Spyder you just neet to execute the script by pressing the *F5* key or by clicking the *Run* button. 
 
 # Examples
 

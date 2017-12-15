@@ -86,12 +86,12 @@ def network_size_cost(networkobject, x, **kwargs):
     alpha = kwargs.get('penalty', 600000)  # Penalty parameter
     _hmin = kwargs.get('hmin', 30.0)
     _hmax = kwargs.get('hmax', 50.0)
-    _vmin = kwargs.get('vmin', 0.25)
-    _vmax = kwargs.get('vmax', 3.50)
+    _vmin = kwargs.get('vmin', 0.5)
+    _vmax = kwargs.get('vmax', 2.50)
 
     # Perform the EPANET simulation
     networkobject.change_diameters(x)
-    p, v, l = networkobject.simulate()
+    p, v, pl = networkobject.simulate()
 
     # Convert the results to numpy arrays
     hmin = np.array([_hmin] * len(p), dtype=np.float)
@@ -103,14 +103,14 @@ def network_size_cost(networkobject, x, **kwargs):
 
     # Compute the penalty cost
     penalty_cost = sum(1 - vel/vmin) + sum(vel/vmax - 1) + sum(1 - head/hmin)
-    print('  Penalty cost: {0}'.format(penalty_cost))
+    print('\n  Penalty cost: {0}'.format(penalty_cost))
     # \ + sum((head/hmax - 1)**2)
 
     # Objective function, cost from pipe length
     cost = 0
     for i in range(len(x)):
         # Real cost
-        c = unit_prices[x[i]] * l[i]
+        c = unit_prices[x[i]] * pl[i]
         cost += c
     print('  Cost: {0}'.format(cost))
 
@@ -118,12 +118,80 @@ def network_size_cost(networkobject, x, **kwargs):
     violations = sum(hmin > head) + sum(vmin > vel) + sum(vmax < vel)
     if violations == 0:
         alpha = 0
-    # print("Violations: {0}".format(violations))
+    print('  Violations: {0}'.format(violations))
+    print('  Final cost: {0}'.format(cost + alpha * penalty_cost))
 
     return cost + alpha * penalty_cost
 
 
-def network_size2(networkobject, x, **kwargs):
+#def network_size2(networkobject, x, **kwargs):
+#    """" The objective function for dimensioning optimization
+#
+#    :param networkobject, an implementation of a 'Network' class
+#    :param x, a list of pipe diameters
+#    :return fitness, minimum is better
+#    """
+#    unit_prices = kwargs.get('price', defaults)
+#    _hmin = kwargs.get('hmin', 30.0)
+#    _hmax = kwargs.get('hmax', 100.0)
+#    _vmin = kwargs.get('vmin', 0.25)
+#    _vmax = kwargs.get('vmax', 3.50)
+#    _penalty = kwargs.get('penalty_step', 1)
+#
+#    # Perform the EPANET simulation
+#    networkobject.change_diameters(x)
+#    p, v, l = networkobject.simulate()
+#
+#    # print("Pressure: ", p)
+#    # print("Velocity: ", v)
+#
+#    # Penalty for not supplying the required minimum pressure at each node
+#    pH = 0
+#
+#    # TODO: Find a way to exclude certain nodes
+#    # WARNING: This block will exclude the last node from HEAD penalty
+#    # because for EPANET, last node is the SOURCE or TANK of the network and
+#    # its pressure is always zero because is open to atmospheric pressure
+#    # print('  Pressure:')
+#    for i in range(len(p)-1):
+#        # print('  {0} < {1}?'.format(p[i], _hmin))
+#        if p[i] < _hmin:
+#            # print('  yes')
+#            pH += _penalty
+#        if p[i] < 0:
+#            pH += _penalty
+#
+#    # Penalty for violating the flow velocity limits of the pipes
+#    pV = 0
+#    # print('  Velocity:')
+#    for i in range(len(v)):
+#        # print('  {0} < {1} or {0} > {2}?'.format(v[i], _vmin, _vmax))
+#        if v[i] < _vmin or v[i] > _vmax:
+#            # print('  yes')
+#            pV += _penalty
+#
+#    # This was added later
+#    penalties = pV + pH
+#    if penalties == 0:
+#        # print('   No penalties')
+#        penalties = 1
+#
+#    # Objective function
+#    cost = 0
+#    if pV == 0:
+#        pV = 1
+#    if pH == 0:
+#        pH = 1
+#    for i in range(len(x)):
+#        # c = unit_prices[x[i]] * l[i]
+#        c = unit_prices[x[i]] * l[i] * pV * pH
+#        cost += c
+#    # print('  Total cost: {0}, penalty: {1}'.format(cost, penalties))
+#    # return cost * penalties
+#    return cost
+
+
+def network_size_aco(networkobject, x, **kwargs):
     """" The objective function for dimensioning optimization
 
     :param networkobject, an implementation of a 'Network' class
@@ -134,59 +202,32 @@ def network_size2(networkobject, x, **kwargs):
     _hmin = kwargs.get('hmin', 30.0)
     _hmax = kwargs.get('hmax', 100.0)
     _vmin = kwargs.get('vmin', 0.25)
-    _vmax = kwargs.get('vmax', 3.50)
+    _vmax = kwargs.get('vmax', 4.00)
     _penalty = kwargs.get('penalty_step', 1)
 
     # Perform the EPANET simulation
     networkobject.change_diameters(x)
-    p, v, l = networkobject.simulate()
-
-    # print("Pressure: ", p)
-    # print("Velocity: ", v)
+    p, v, pl = networkobject.simulate()
 
     # Penalty for not supplying the required minimum pressure at each node
     pH = 0
 
-    # TODO: Find a way to exclude certain nodes
-    # WARNING: This block will exclude the last node from HEAD penalty
-    # because for EPANET, last node is the SOURCE or TANK of the network and
-    # its pressure is always zero because is open to atmospheric pressure
-    # print('  Pressure:')
-    for i in range(len(p)-1):
-        # print('  {0} < {1}?'.format(p[i], _hmin))
-        if p[i] < _hmin:
-            # print('  yes')
-            pH += _penalty
-        if p[i] < 0:
+    SOURCE_NODES = 1
+    for i in range(len(p) - SOURCE_NODES):
+        if p[i] < _hmin or p[i] < 0:
             pH += _penalty
 
     # Penalty for violating the flow velocity limits of the pipes
     pV = 0
-    # print('  Velocity:')
     for i in range(len(v)):
-        # print('  {0} < {1} or {0} > {2}?'.format(v[i], _vmin, _vmax))
         if v[i] < _vmin or v[i] > _vmax:
-            # print('  yes')
             pV += _penalty
-
-    # This was added later
-    penalties = pV + pH
-    if penalties == 0:
-        # print('   No penalties')
-        penalties = 1
 
     # Objective function
     cost = 0
-    if pV == 0:
-        pV = 1
-    if pH == 0:
-        pH = 1
     for i in range(len(x)):
-        # c = unit_prices[x[i]] * l[i]
-        c = unit_prices[x[i]] * l[i] * pV * pH
+        c = unit_prices[x[i]] * pl[i] * (pV+1) * (pH+1)
         cost += c
-    # print('  Total cost: {0}, penalty: {1}'.format(cost, penalties))
-    # return cost * penalties
     return cost
 
 
@@ -206,7 +247,7 @@ def network_size(networkobject, x, **kwargs):
 
     # Perform the EPANET simulation
     networkobject.change_diameters(x)
-    p, v, l = networkobject.simulate()
+    p, v, pl = networkobject.simulate()
 
     # Penalty for not supplying the required minimum pressure at each node
     pH = 0
@@ -225,7 +266,7 @@ def network_size(networkobject, x, **kwargs):
     # Objective function
     cost = 0
     for i in range(len(x)):
-        c = unit_prices[x[i]] * l[i] * (pV+1) * (pH+1)
+        c = unit_prices[x[i]] * pl[i] * (pV+1) * (pH+1)
         cost += c
     return cost
 

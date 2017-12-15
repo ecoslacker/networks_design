@@ -30,7 +30,7 @@ from math import sqrt, pow
 from matplotlib.path import Path
 
 from hydraulic import Network
-from objectivefunctions import network_size, network_size_cost
+from objectivefunctions import network_size_aco
 
 # To print complete arrays
 np.set_printoptions(threshold='nan')
@@ -1244,6 +1244,7 @@ class OptimizeDimensionsACO(ACO):
         self.function = kwargs.get('function', None)        # Distance function
         self.data_dir = kwargs.get('path', 'data/')
         self.type = kwargs.get('instance_type', 'DIMEN_NET')  # Problem
+        self.vv = kwargs.get('verbose', False)                # Verbose
 
         # Unitary price of pipe diameter per unit of length
         self.price = {25: 2, 51: 5, 76: 8, 102: 11, 152: 16, 203: 23,
@@ -1252,22 +1253,27 @@ class OptimizeDimensionsACO(ACO):
         self.diameters = self.price.keys()
         self.diameters.sort()
 
-        self.tau_0 = 0.5
-        self.Cnn = None
-        self.tau_max = None
-        self.tau_min = None
-
-        if self.flag == 'MMAS':
-            # Initialize with nearesth
-            self.Cnn = 16000  # TwoLoop=16000
-
         # Read instance & create colony
         self.network = Network(self.data_dir, instance)
         self.network.open_network()
         self.network.initialize()
 
+        # The dimension if the problem
         self.n = self.network.pipes
         self.dimension = self.network.pipes
+
+        self.Cnn = 16000.  # TwoLoop=16000
+        self.tau_max = None
+        self.tau_min = None
+
+        # Initialize pheromone trail
+        self.tau_0 = self.ants / self.Cnn
+        if self.flag == 'MMAS':
+
+            # Pheromone trails are initialized to upper pheromone trail limit
+            self.tau_max = 1.0 / (self.rho * self.Cnn)
+            self.tau_min = self.tau_max / (2.0 * self.n)
+            self.tau_0 = self.tau_max
 
         self.create_colony(self.type)
 
@@ -1292,7 +1298,8 @@ class OptimizeDimensionsACO(ACO):
         self.choice_info = np.ones_like(self.pheromone)
         self.compute_choice_information()
         # self.choice_info = self.choice_info * 1./len(self.diameters)
-        print(self.choice_info)
+        if self.vv:
+            print(self.choice_info)
 
         # Initialize the variables concerning statistics
         self.iteration = 0
@@ -1319,14 +1326,21 @@ class OptimizeDimensionsACO(ACO):
 
             if iter_best_ant.tour_length < self.best_so_far_ant.tour_length:
                 self.best_so_far_ant = iter_best_ant.clone()
-                print("Best so far ant:")
-                print(self.best_so_far_ant)
+                if self.vv:
+                    print("Best so far ant:")
+                    print(self.best_so_far_ant)
 
             # Update pheromone trails
-            # self.as_pheromone_update()
-            self.mmas_pheromone_update(iter_best_ant)
+            if self.flag == 'AS':
+                self.as_pheromone_update()
+            elif self.flag == 'MMAS':
+                self.mmas_pheromone_update(iter_best_ant)
+
             self.iteration += 1
 
+        diameters = [self.diameters[i] for i in self.best_so_far_ant.tour]
+        self.network.change_diameters(diameters)
+        self.network.save_inp_file('/Users/ecoslacker/Desktop/TwoLoopSol.inp')
         self.network.close_network()  # Close the EPANET solver
 
         # Measure execution time
@@ -1336,33 +1350,41 @@ class OptimizeDimensionsACO(ACO):
         return self.best_so_far_ant
 
     def construct_solutions(self):
-        print('  Constructing solutions...')
+        if self.vv:
+            print('  Constructing solutions...')
         indices = range(len(self.diameters))
         # Empty Ants memory
         for ant in self.colony:
             ant.visited = np.zeros(self.n, dtype=np.int64)
         # Construct a tour
         for ant in self.colony:
+            if self.vv:
+                print('  Ant {0} is constructing a solution'.format(ant.uid))
             for step in range(self.n):
-                # print('  Step {0}'.format(step))
                 probabilities = self.choice_info[step]
                 probabilities = self.adjust_probabilities(probabilities)
-                print('  Probabilities: {0}'.format(probabilities))
+
                 diameter = int(np.random.choice(indices, 1, p=probabilities))
-                # diameter = int(np.random.choice(indices, 1)) # Uniform distrib.
-                # print('   Selected {0}'.format(diameter))
+                # diameter = int(np.random.choice(indices, 1)) # Uniform dist.
+
+                if self.vv:
+                    print('  Step {0}'.format(step))
+                    print('  Probabilities: {0}'.format(probabilities))
+                    print('  Selected {0}'.format(diameter))
                 ant.tour[step] = diameter
                 ant.visited[step] = 1
+
             # Get the real diameter values
             diameters = [self.diameters[i] for i in ant.tour]
             # print('   Diameters: {0}'.format(diameters))
             # Compute the cost of the network
-            ant.tour_length = network_size(self.network, diameters,
-                                           price=self.price,
-                                           vmin=0.5, vmax=4.0)
+            ant.tour_length = network_size_aco(self.network, diameters,
+                                               price=self.price)
 #            ant.tour_length = network_size_cost(self.network, diameters,
-#                                                price=self.price)
-            print('   Tour length: {0}'.format(ant.tour_length))
+#                                                price=self.price,
+#                                                penalty=4400000)
+            if self.vv:
+                print('   Tour length: {0}'.format(ant.tour_length))
         return
 
     def as_pheromone_update(self):
@@ -1370,6 +1392,10 @@ class OptimizeDimensionsACO(ACO):
 
         Update the pheromone trace of the ants
         """
+        if self.vv:
+            print('*** Pheromone ***')
+            print(self.pheromone)
+
         self.evaporate()
 
         # Each ant in the colony deposit pheromone
@@ -1377,7 +1403,9 @@ class OptimizeDimensionsACO(ACO):
             self.deposit_pheromone(ant)
 
         self.compute_choice_information()
-        print('  Updating pheromones...done!')
+
+        if self.vv:
+            print('  Updating pheromones...done!')
         return
 
     def mmas_pheromone_update(self, ant):
@@ -1386,7 +1414,18 @@ class OptimizeDimensionsACO(ACO):
         Update the pheromone trace of the iteration best ant or
         the best so far ant.
         """
+        if self.vv:
+            print('*** Pheromone ***')
+            print(self.pheromone)
+
+        self.evaporate()
         self.deposit_pheromone(ant)
+        self.compute_choice_information()
+
+        if self.vv:
+            print('  Updating pheromones...done!')
+            print(self.pheromone)
+        return
 
     def deposit_pheromone(self, ant):
         """ Deposit pheromone
@@ -1414,11 +1453,16 @@ if __name__ == "__main__":
     instance = 'TwoLoop.inp'
     n_ants = 10
     aco = OptimizeDimensionsACO(n_ants, instance, path=directory, flag='MMAS',
-                                max_iters=100, rho=0.8, alpha=5, beta=3)
-    best = aco.run()
-    print("\n*** OVERALL BEST SOLUTION ***")
-    print(best)
-    aco.plot_best()
+                                max_iters=500, rho=0.02, alpha=1, beta=0.25,
+                                verbose=False)
+#    best = aco.run()
+#    print("\n*** OVERALL BEST SOLUTION ***")
+#    print(best)
+#    aco.plot_best()
+#
+#    # Real dimension diameters
+#    diameters = [aco.diameters[i] for i in best.tour]
+#    print('Diameters: {0}'.format(diameters))
 
     # **** TEST CODE FOR NETWORKS LAYOUT OPTIMIZATION ****
 
@@ -1450,4 +1494,4 @@ if __name__ == "__main__":
 #    tsp.plot_best()
 
     run_time = datetime.now() - start_time
-    print(' *** Execution time: {0}'.format(run_time))
+    print(' *** Execution time: {0} ***'.format(run_time))
