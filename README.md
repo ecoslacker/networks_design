@@ -39,9 +39,9 @@ or
 
 ## Install a Python environment
 
-You need to install the requirements independently or you can install complete Python distribution such as **Anaconda** (<https://www.anaconda.com/download/>). Be sure to insall the Python 2.7 version.
+You need to install the requirements independently or you can install complete Python distribution such as **Anaconda** (<https://www.anaconda.com/download/>). Be sure to install the Python 2.7 version.
 
-On Windows you can also try with another distribution such as **Python(x,y)**. However you should consider that this framework is only tested under **Anaconda** and you may need some extra work.
+On Windows you can also try with another distribution such as **Python(x,y)**. However, you should consider that this framework is only tested under **Anaconda** and you may need some extra work.
 
 Once the environment is installed, it is recommended to use the *Spyder* IDE to edit and run the Python scripts.
 
@@ -75,7 +75,7 @@ There is no need to edit the code above this line (unless you know exactly what 
 
 The *optimizer_ga.py* has two function examples, those can be identified by:
 
-* *optim_dimensions_ga*: to optimze the dimensions of a network using Genetic Algorithms.
+* *optim_dimensions_ga*: to optimize the dimensions of a network using Genetic Algorithms.
 * *optim_layout_ga*: to optimize the layout of a network using Genetic Algorithms.
 
 On the other hand the *optimizer_aco.py* has the function:
@@ -86,13 +86,13 @@ Each function needs different arguments, you can explore each function's documen
 
 ## Configure
 
-Uncomment the lines of code with the functions you want to use, this is done by removing the number sign ('#') at the start of each line of code.
+Uncomment the lines of code with the functions you want to use, this is done by removing the number sign (#) at the start of each line of code.
 
 **NOTE**: Remember that in Python language indentation is important, so you need to preserve the number of spaces in multiples of 4 at the start of each line.
 
-If you want to use the layout functions it is recommended to comment the pipe sizing functions and viceversa. This is done to avoid problems at runtime.
+If you want to use the layout functions it is recommended to comment the pipe sizing functions and vice versa. This is done to avoid problems at runtime.
 
-Then you need to provide the metaheuristic parameters values to each function, the most important value is the path of the data file for the desired problem instance. The format of the input file required for each probleis describen in the next section. 
+Then you need to provide the metaheuristic parameters values to each function, the most important value is the path of the data file for the desired problem instance. The format of the input file required for each problem is described in the next section. 
 
 ## Data files
 
@@ -123,13 +123,13 @@ EOF
 
 For the pipe sizing problem:
 
-* An EPANET's **inp** formatted text file with the network configuration and data. Be sure to provide the rigth units (SI or English Units) to the network. Please consult the [EPANET 2 User Manual](<https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf>) if necessary. You can create this files with the EPANET 2 software (<https://www.epa.gov/water-research/epanet>).
+* An EPANET's **inp** formatted text file with the network configuration and data. Be sure to provide the right units (SI or English Units) to the network. Please consult the [EPANET 2 User Manual](<https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf>) if necessary. You can create this files with the EPANET 2 software (<https://www.epa.gov/water-research/epanet>).
 
 You can find some examples of these files in the **data** directory.
 
 ## Run
 
-Using *Spyder* IDE you just neet to execute the script by pressing the *F5* key or by clicking the *Run* button. 
+Using *Spyder* IDE you just need to execute the script by pressing the *F5* key or by clicking the *Run* button. 
 
 # Examples
 
@@ -145,7 +145,7 @@ TO BE INCLUDED
 
 ## Optimize the pipe diameters using GA
 
-If you want to use the GA metaheuristic you need to open the *optimizer_ga.py* script. Then uncomment the lines for the dimensioing test code.
+If you want to use the GA metaheuristic you need to open the *optimizer_ga.py* script. Then uncomment the lines for the dimensioning test code.
 
 ```python
 if __name__ == "__main__":
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     print('\n{0} executions completed in: {1}'.format(execs, run_time))
 ```
 
-All the lines that have a number sign ('#') at the beginning are comentaries.
+All the lines that have a number sign (#) at the beginning are commentaries.
 
 The first line is the main loop condition.
 
@@ -178,11 +178,11 @@ The second line saves the start time of the execution and the last two lines are
 
 The third line indicates the number of executions (`execs`) that will be performed, in this case is 20.
 
-The next three lines indicate the alues if the function arguments, the folder or directory (`path`) where the input file is located, the name of the input file (`inp_file`) and the directory where the results are gonna be saved in (`directory`).
+The next three lines indicate the values if the function arguments, the folder or directory (`path`) where the input file is located, the name of the input file (`inp_file`) and the directory where the results are going to be saved in (`directory`). These directories should exist in advance.
 
 The next two lines are the function to be used, in this case `optim_dimensions_ga` and its arguments. Note that the second line starts aligned to the opening parenthesis `(`.
 
-Finally the next lines are just for showing (using the `print` function) the best solution obtained from the executions.
+Finally, the next lines are just for showing (using the `print` function) the best solution obtained from the executions.
 
 # License
 
