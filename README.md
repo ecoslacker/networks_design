@@ -55,7 +55,7 @@ pip install pyevolve
 
 On Unix-like systems (macOS, Linux) open a *Terminal* and type the command, note that you may need root permissions. On Windows open a *System prompt* and type the command, also you may need to have Administrator privileges.
 
-**IMPORTANT NOTE**: If your system does not have *Pyevolve*, the program will try to install this requirement automagically at the first execution. Your computer should be to be connected to the Internet.
+**IMPORTANT NOTE**: If your system does not have *Pyevolve*, the program will try to install this requirement automagically at the first execution. Your computer should be connected to the Internet.
 
 # Usage
 
@@ -88,7 +88,7 @@ Each function needs different arguments, you can explore each function's documen
 
 Uncomment the lines of code with the functions you want to use, this is done by removing the number sign (#) at the start of each line of code.
 
-**NOTE**: Remember that in Python language indentation is important, so you need to preserve the number of spaces in multiples of 4 at the start of each line.
+**NOTE**: Remember that in Python language indentation is important, so you need to preserve the number of spaces as multiples of four at the beginning of each line.
 
 If you want to use the layout functions it is recommended to comment the pipe sizing functions and vice versa. This is done to avoid problems at runtime.
 
